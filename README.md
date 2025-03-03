@@ -1,46 +1,93 @@
-# Getting Started with Create React App
+# Edukita Grading System - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+Edukita Grading System Frontend is a web interface that allows teachers to grade and provide feedback on student assignments. It is built using **React** with **TypeScript** and **Ant Design** for UI components.
 
-## Available Scripts
+## Features
+- **Teacher Dashboard**
+  - View a list of student assignments.
+  - Open an assignment and provide feedback.
+- **Student Dashboard**
+  - Submit assignments for grading.
+  - View grades and teacher feedback.
+- **State Management**
+  - Uses **Redux Toolkit** for managing application state.
+- **Routing**
+  - Implements **React Router** for navigation.
 
-In the project directory, you can run:
+## Project Structure
+```
+/src
+  ├── components/       # Reusable UI components
+  ├── pages/            # Page-level components
+  ├── store/            # Redux store configuration
+  ├── routes/           # Application routing
+  ├── utils/            # Utility functions
+  ├── hooks/            # Custom React hooks
+  ├── App.tsx           # Main application entry point
+  ├── index.tsx         # Root rendering file
+```
 
-### `npm start`
+## Setup Instructions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1. Clone Repository
+```sh
+git clone https://github.com/user/edukita-frontend.git
+cd edukita-frontend
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 2. Install Dependencies
+```sh
+npm install
+```
 
-### `npm test`
+### 3. Run the Application
+```sh
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Running with Docker
+```sh
+docker-compose up --build
+```
 
-### `npm run build`
+## Deployment with Kubernetes
+### 1. Build & Push Images
+```sh
+docker build -t edukita-frontend .
+docker tag edukita-frontend:latest your-docker-repo/edukita-frontend:latest
+docker push your-docker-repo/edukita-frontend:latest
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Apply Kubernetes Configurations
+```sh
+kubectl apply -f k8s/frontend-deployment.yaml
+kubectl apply -f k8s/frontend-service.yaml
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Environment Variables
+Create a `.env` file and configure the following:
+```
+REACT_APP_BACKEND_URL=http://localhost:3000
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Architecture Diagram
+The frontend interacts with the backend API to fetch assignments and submit grades:
+```
++----------------------+        +----------------------+
+|      Browser       | -----> |      Frontend       |
++----------------------+        +----------------------+
+                                      |
+                                      V
+                           +----------------------+
+                           |      Backend API     |
+                           +----------------------+
+```
+- The **browser** loads the React frontend.
+- The **frontend** makes API calls to the **backend**.
+- The **backend** processes requests and interacts with the database.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Author:** Your Name | **Version:** 1.0.0
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
