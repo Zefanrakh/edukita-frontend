@@ -1,5 +1,6 @@
 import { Flex } from "antd";
 import { Typography } from "antd";
+import "./css/AssignmentInfoField.css";
 const { Title } = Typography;
 
 export default function AssignmentInfoField({
@@ -23,7 +24,13 @@ export default function AssignmentInfoField({
         </Title>
       </div>
       :
-      <div style={{ flex: 3, whiteSpace: "pre-wrap" }}>
+      <div
+        style={{
+          flex: 3,
+          whiteSpace: "pre-wrap",
+        }}
+        className="scroll-container"
+      >
         <Title level={titleLevel} style={{ margin: 0, flex: 1 }}>
           {value}
         </Title>
