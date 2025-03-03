@@ -1,6 +1,6 @@
 import { Layout, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 export default function MainLayout() {
   /* --------------------- HOOK --------------------- */
@@ -22,6 +22,7 @@ export default function MainLayout() {
           ]}
         />
       </Sider>
+      <Navigate to="/assignment" replace />;
       <Outlet />
     </Layout>
   );
