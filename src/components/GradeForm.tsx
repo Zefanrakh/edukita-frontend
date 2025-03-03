@@ -7,6 +7,7 @@ import {
 } from "../redux/assignmentSlice";
 import { Role } from "../types/enums/Role.enum";
 import { GradeAssignmentDto } from "../types/dtos/Grade";
+import AssignmentView from "./AssignmentView";
 
 export default function GradeForm() {
   /* --------------------- HOOK --------------------- */
@@ -55,6 +56,8 @@ export default function GradeForm() {
 
   return (
     <Form form={form} layout="vertical" onFinish={handleGradeSubmit}>
+      <AssignmentView />
+      <br />
       <Form.Item
         label="Grade"
         name="grade"

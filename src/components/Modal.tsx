@@ -6,9 +6,11 @@ import React from "react";
 
 export default function ModalWrapper({
   children,
+  title,
 }: {
   handleOk?: () => Promise<void>;
   children: React.ReactNode;
+  title: string;
 }) {
   /* --------------------- STATE HOOK --------------------- */
 
@@ -20,7 +22,7 @@ export default function ModalWrapper({
 
   return (
     <Modal
-      title="Grade Assignment"
+      title={title}
       open={isOpen}
       onCancel={() => dispatch(setIsOpen(false))}
       confirmLoading={loading}

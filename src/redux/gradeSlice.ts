@@ -79,6 +79,12 @@ const gradeSlice = createSlice({
     setLoading: (state: GradeState, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+    setSelectedGrade: (
+      state: GradeState,
+      action: PayloadAction<ReadGradeDto | null>
+    ) => {
+      state.selectedGrade = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -105,5 +111,6 @@ export const {
   setSubject,
   setRequestId,
   setLoading,
+  setSelectedGrade,
 } = gradeSlice.actions;
 export default gradeSlice.reducer;

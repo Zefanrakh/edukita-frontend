@@ -52,6 +52,7 @@ const AssignmentList: React.FC = () => {
   /* --------------------- FUNCTION --------------------- */
 
   const openGradeModal = (assignment: ReadAssignmentDto) => {
+    if (user?.role === Role.Student) return;
     dispatch(setFormType("grade"));
     dispatch(setSelectedAssignment(assignment));
     dispatch(setIsOpen(true));
@@ -114,11 +115,21 @@ const AssignmentList: React.FC = () => {
         })}
       />
 
-      <ModalWrapper>
+      <ModalWrapper
+        title={
+          formType === "grade"
+            ? "Grade Assignment"
+            : formType === "submit"
+            ? "Submit Assignment"
+            : ""
+        }
+      >
         {formType === "grade" ? (
           user?.role === Role.Teacher && <GradeForm />
-        ) : (
+        ) : formType === "submit" ? (
           <SubmitAssignmentForm />
+        ) : (
+          <></>
         )}
       </ModalWrapper>
     </Flex>

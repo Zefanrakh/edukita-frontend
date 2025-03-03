@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGrades, setLimit, setPage, setSearch } from "../redux/gradeSlice";
+import {
+  fetchGrades,
+  setLimit,
+  setPage,
+  setSearch,
+  setSelectedGrade,
+} from "../redux/gradeSlice";
 import { AppDispatch, RootState } from "../redux/store";
 import { Button, Flex, Input, Select, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { ReadGradeDto } from "../types/dtos/Grade";
 import { Role } from "../types/enums/Role.enum";
 import { fetchUsers, setSelectedUserId } from "../redux/userSlice";
+import { setFormType, setIsOpen } from "../redux/modalSlice";
+import ModalWrapper from "./Modal";
+import GradeView from "./GradeView";
 
 const { Option } = Select;
 
@@ -21,6 +30,7 @@ const GradeList: React.FC = () => {
   const { data: dataUsers, selectedUserId } = useSelector(
     (state: RootState) => state.user
   );
+  const { formType } = useSelector((state: RootState) => state.modal);
 
   /* --------------------- CONSTANT --------------------- */
 
@@ -49,6 +59,14 @@ const GradeList: React.FC = () => {
   useEffect(() => {
     dispatch(fetchGrades());
   }, [dispatch, page, limit, search, subject, selectedUserId]);
+
+  /* --------------------- FUNCTION --------------------- */
+
+  const openGradeModal = (grade: ReadGradeDto) => {
+    dispatch(setFormType("gradeView"));
+    dispatch(setSelectedGrade(grade));
+    dispatch(setIsOpen(true));
+  };
 
   /* --------------------- RENDER --------------------- */
 
@@ -98,7 +116,13 @@ const GradeList: React.FC = () => {
             dispatch(setLimit(pageSize));
           },
         }}
+        onRow={(record) => ({
+          onClick: () => openGradeModal(record),
+        })}
       />
+      <ModalWrapper title="Grade">
+        {formType === "gradeView" && <GradeView />}
+      </ModalWrapper>
     </Flex>
   );
 };

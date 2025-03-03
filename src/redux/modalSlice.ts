@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type FormType = "submit" | "grade";
+type FormType = "submit" | "grade" | "gradeView";
 
 export interface ModalState {
   isOpen: boolean;
