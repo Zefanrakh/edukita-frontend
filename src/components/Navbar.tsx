@@ -2,7 +2,7 @@ import { Flex, Menu } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { logout } from "../redux/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Role } from "../types/enums/Role.enum";
 
 const Navbar = () => {
@@ -14,6 +14,7 @@ const Navbar = () => {
   /* --------------------- HOOK --------------------- */
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* --------------------- FUNCTION --------------------- */
 
@@ -29,6 +30,7 @@ const Navbar = () => {
       <div style={{ flex: 1 }}>
         <Menu
           mode="horizontal"
+          selectedKeys={[location.pathname.slice(1)]}
           items={
             token
               ? [{ key: "logout", label: "Logout", onClick: handleLogout }]

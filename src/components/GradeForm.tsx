@@ -8,18 +8,27 @@ import {
 import { Role } from "../types/enums/Role.enum";
 import { GradeAssignmentDto } from "../types/dtos/Grade";
 import AssignmentView from "./AssignmentView";
+import { useEffect } from "react";
 
 export default function GradeForm() {
-  /* --------------------- HOOK --------------------- */
-
-  const [form] = Form.useForm<GradeAssignmentDto>();
-
   /* --------------------- STATE HOOK --------------------- */
 
   const dispatch = useDispatch<AppDispatch>();
-  const { loading } = useSelector((state: RootState) => state.assignment);
+  const { loading, selectedAssignment } = useSelector(
+    (state: RootState) => state.assignment
+  );
 
   const { user } = useSelector((state: RootState) => state.auth);
+
+  /* --------------------- HOOK --------------------- */
+
+  const [form] = Form.useForm<GradeAssignmentDto>();
+  useEffect(() => {
+    form.setFieldsValue({
+      grade: selectedAssignment?.grade?.grade,
+      feedback: selectedAssignment?.grade?.feedback,
+    });
+  }, [selectedAssignment]);
 
   /* --------------------- FUNCTION --------------------- */
 
