@@ -46,6 +46,12 @@ export default function GradeView() {
         titleLevel={5}
         gap={10}
       />
+      <AssignmentInfoField
+        label="Graded By"
+        value={selectedGrade?.teacher.name}
+        titleLevel={5}
+        gap={10}
+      />
     </Card>
   );
 }
