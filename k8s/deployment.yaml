@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edukita-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: edukita-frontend
+  template:
+    metadata:
+      labels:
+        app: edukita-frontend
+    spec:
+      containers:
+        - name: edukita-frontend
+          image: edukita-frontend:latest
+          ports:
+            - containerPort: 80
